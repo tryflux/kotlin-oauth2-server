@@ -3,11 +3,14 @@ package nl.myndocs.oauth2.token
 import java.time.Instant
 
 data class AccessToken(
-        val accessToken: String,
+        override val tokenValue: String,
         val tokenType: String,
         override val expireTime: Instant,
         val username: String?,
-        val clientId: String,
-        val scopes: Set<String>,
+        override val clientId: String,
+        override val scopes: Set<String>,
         val refreshToken: RefreshToken?
-) : ExpirableToken
+) : ClientToken {
+
+        override val kind = TokenKind.ACCESS
+}

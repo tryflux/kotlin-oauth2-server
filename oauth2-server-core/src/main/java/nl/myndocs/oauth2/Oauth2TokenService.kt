@@ -351,9 +351,9 @@ class Oauth2TokenService(
     }
 
     private fun AccessToken.toTokenResponse() = TokenResponse(
-            accessToken,
+        tokenValue,
             tokenType,
             expiresIn(),
-            refreshToken?.refreshToken
+            refreshToken?.tokenValue
     )
 }

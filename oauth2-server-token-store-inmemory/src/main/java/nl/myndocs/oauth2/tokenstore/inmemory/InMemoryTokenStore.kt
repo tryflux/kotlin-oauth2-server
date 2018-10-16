@@ -8,7 +8,7 @@ class InMemoryTokenStore : TokenStore {
     private val refreshTokens = mutableMapOf<String, RefreshToken>()
 
     override fun storeAccessToken(accessToken: AccessToken) {
-        accessTokens[accessToken.accessToken] = accessToken
+        accessTokens[accessToken.tokenValue] = accessToken
 
         if (accessToken.refreshToken != null) {
             storeRefreshToken(accessToken.refreshToken!!)
@@ -19,7 +19,7 @@ class InMemoryTokenStore : TokenStore {
             locateToken(accessTokens, token)
 
     override fun storeCodeToken(codeToken: CodeToken) {
-        codes[codeToken.codeToken] = codeToken
+        codes[codeToken.tokenValue] = codeToken
     }
 
     override fun codeToken(token: String): CodeToken? =
@@ -28,7 +28,7 @@ class InMemoryTokenStore : TokenStore {
     override fun consumeCodeToken(token: String): CodeToken? = codes.remove(token)
 
     override fun storeRefreshToken(refreshToken: RefreshToken) {
-        refreshTokens[refreshToken.refreshToken] = refreshToken
+        refreshTokens[refreshToken.tokenValue] = refreshToken
     }
 
     override fun refreshToken(token: String): RefreshToken? =

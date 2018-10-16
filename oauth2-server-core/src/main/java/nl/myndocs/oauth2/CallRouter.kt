@@ -138,7 +138,7 @@ class CallRouter(
                 stateQueryParameter = "&state=" + queryParameters["state"]
             }
 
-            callContext.redirect(queryParameters["redirect_uri"] + "?code=${redirect.codeToken}$stateQueryParameter")
+            callContext.redirect(queryParameters["redirect_uri"] + "?code=${redirect.tokenValue}$stateQueryParameter")
         } catch (unverifiedIdentityException: InvalidIdentityException) {
             callContext.respondStatus(STATUS_UNAUTHORIZED)
             authorizer.failedAuthentication()
@@ -174,7 +174,7 @@ class CallRouter(
             }
 
             callContext.redirect(
-                    queryParameters["redirect_uri"] + "#access_token=${redirect.accessToken}" +
+                    queryParameters["redirect_uri"] + "#access_token=${redirect.tokenValue}" +
                             "&token_type=bearer&expires_in=${redirect.expiresIn()}$stateQueryParameter"
             )
 
