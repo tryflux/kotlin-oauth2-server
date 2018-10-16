@@ -168,7 +168,11 @@ class Oauth2TokenService(
                 refreshToken.username,
                 refreshToken.clientId,
                 refreshToken.scopes,
-                refreshToken
+                refreshTokenConverter.convertToToken(
+                    refreshToken.username,
+                    refreshToken.clientId,
+                    refreshToken.scopes
+                )
         )
 
         tokenStore.storeAccessToken(accessToken)
